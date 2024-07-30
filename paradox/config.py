@@ -186,6 +186,7 @@ class Config:
             "open",
             "tamper",
         ],
+        "HOMEASSISTANT_ZONE_CLASSES": {}, # Dict for overriding HASS sensor class by zone name
         "HOMEASSISTANT_NOTIFICATIONS_IGNORE_EVENTS": [],  # List of tuples or regexp matching "type,label,property=value,property2=value" eg. [(major, minor), "zone:HOME:entry_delay=True", ...]
         "HOMEASSISTANT_NOTIFICATIONS_ALLOW_EVENTS": [],  # Same as before but as a white list. Default is use EVENT_FILTERS
         "HOMEASSISTANT_NOTIFICATIONS_EVENT_FILTERS": [  # list of tags, property changes to include or exclude. See event.py for tag list

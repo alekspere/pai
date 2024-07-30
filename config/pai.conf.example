@@ -149,6 +149,17 @@ import logging
 #     'open',
 #     'tamper'
 # ]
+#
+# By default, zones show up in HA as motion sensors.
+# Use the example below to override the zone class to the preferred one.
+# https://www.home-assistant.io/integrations/binary_sensor/#device-class
+# HOMEASSISTANT_ZONE_CLASSES = {
+#     'Fire': 'smoke',
+#     'Garage': 'garage_door',
+#     'Back Door': 'door',
+#     'LNG': 'gas'
+# }
+#
 ## Event filtering by tags:
 # HOMEASSISTANT_NOTIFICATIONS_EVENT_FILTERS = [ # list of tags to include or exclude see hardware event.py for tag list
 #     'live,alarm,-restore', # or

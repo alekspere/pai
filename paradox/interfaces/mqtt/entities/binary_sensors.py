@@ -1,3 +1,4 @@
+from paradox.config import config as cfg
 from paradox.interfaces.mqtt.entities.abstract_entity import AbstractEntity
 from paradox.lib.utils import sanitize_key
 
@@ -34,11 +35,24 @@ class ZoneStatusBinarySensor(AbstractStatusBinarySensor):
         super().__init__(*args, **kwargs)
 
         self.pai_entity_type = "zone"
+        self.hass_entity_class = cfg.HOMEASSISTANT_ZONE_CLASSES.get(self.label)
 
     def serialize(self):
         config = super().serialize()
+
         if self.property == 'open':
-            config['device_class'] = 'motion'
+            if self.hass_entity_class:
+                config['device_class'] = self.hass_entity_class
+            else:
+                config['device_class'] = 'motion'
+        elif self.property == 'tamper':
+            config['device_class'] = 'tamper'
+        elif self.property == 'fire':
+            config['device_class'] = 'smoke'
+        elif self.property == 'rf_supervision_trouble':
+            config['device_class'] = 'problem'
+        elif self.property == 'rf_low_battery_trouble':
+            config['device_class'] = 'battery'
 
         return config
 
