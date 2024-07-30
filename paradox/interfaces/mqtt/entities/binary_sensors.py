@@ -37,10 +37,14 @@ class ZoneStatusBinarySensor(AbstractStatusBinarySensor):
         self.pai_entity_type = "zone"
         self.hass_entity_class = cfg.HOMEASSISTANT_ZONE_CLASSES.get(self.label)
 
+    def entity_name_default(self):
+        return f"{self.pai_entity_type.title()} {self.label}"
+    
     def serialize(self):
         config = super().serialize()
 
         if self.property == 'open':
+            config['name'] = self.entity_name_default()
             if self.hass_entity_class:
                 config['device_class'] = self.hass_entity_class
             else:
