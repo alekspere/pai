@@ -43,20 +43,20 @@ class ZoneStatusBinarySensor(AbstractStatusBinarySensor):
     def serialize(self):
         config = super().serialize()
 
-        if self.property == 'open':
-            config['name'] = self.entity_name_default()
+        if self.property == "open":
+            config["name"] = self.entity_name_default()
             if self.hass_entity_class:
-                config['device_class'] = self.hass_entity_class
+                config["device_class"] = self.hass_entity_class
             else:
-                config['device_class'] = 'motion'
-        elif self.property == 'tamper':
-            config['device_class'] = 'tamper'
-        elif self.property == 'fire':
-            config['device_class'] = 'smoke'
-        elif self.property == 'rf_supervision_trouble':
-            config['device_class'] = 'problem'
-        elif self.property == 'rf_low_battery_trouble':
-            config['device_class'] = 'battery'
+                config["device_class"] = "motion"
+        elif self.property == "tamper":
+            config["device_class"] = "tamper"
+        elif self.property == "fire":
+            config["device_class"] = "smoke"
+        elif self.property == "rf_supervision_trouble":
+            config["device_class"] = "problem"
+        elif self.property == "rf_low_battery_trouble":
+            config["device_class"] = "battery"
 
         return config
 
@@ -66,3 +66,12 @@ class SystemBinarySensor(AbstractStatusBinarySensor):
         super().__init__({"key": key}, property, device, availability_topic)
 
         self.pai_entity_type = "system"
+    
+    def serialize(self):
+        config = super().serialize()
+        
+        if self.key == "troubles" and self.property == "trouble":
+            config["name"] = "System Trouble"
+            config["device_class"] = "problem"
+        
+        return config

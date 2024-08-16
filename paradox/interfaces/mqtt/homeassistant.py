@@ -141,3 +141,6 @@ class HomeAssistantMQTTInterface(AbstractMQTTInterface):
             for property_name in system_status:
                 system_property_config = self.entity_factory.make_system_status(system_key, property_name)
                 self._publish_config(system_property_config)
+
+        system_trouble_config = self.entity_factory.make_system_status("troubles", "trouble")
+        self._publish_config(system_trouble_config)

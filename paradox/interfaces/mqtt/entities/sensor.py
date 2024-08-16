@@ -57,11 +57,11 @@ class SystemStatusSensor(AbstractEntity):
 
     def serialize(self):
         config = super().serialize()
-        if self.key == 'power':
-            config['device_class'] = 'voltage'
-            config['unit_of_measurement'] = 'V'
-        elif self.key == 'rf' and self.property == 'noise_floor':
-            config['device_class'] = 'signal_strength'
-            config['unit_of_measurement'] = 'dBm'
+        if self.key == "power":
+            config["device_class"] = "voltage"
+            config["unit_of_measurement"] = "V"
+        elif self.key == "rf" and self.property == "noise_floor":
+            config["device_class"] = "signal_strength"
+            config["unit_of_measurement"] = "dBm"
 
         return config
